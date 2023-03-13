@@ -1,0 +1,17 @@
+package com.comfortatyourdoorstep.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.comfortatyourdoorstep.entities.ServiceProvider;
+import com.comfortatyourdoorstep.entities.ServiceSeeker;
+
+@Repository
+public interface ServiceSeekerRepository extends JpaRepository<ServiceSeeker, Integer> {
+
+	
+    @Query(value = "select * from service_seeker where email=:email", nativeQuery=true)
+	public ServiceProvider findByProviderId(int id);
+
+}

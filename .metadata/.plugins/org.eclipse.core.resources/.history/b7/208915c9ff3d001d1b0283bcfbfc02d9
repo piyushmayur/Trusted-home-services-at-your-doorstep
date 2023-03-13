@@ -1,0 +1,66 @@
+package com.homeservice.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.homeservice.dto.ServiceSeekerDto;
+import com.homeservice.entities.Employee;
+import com.homeservice.entities.ServiceSeeker;
+import com.homeservice.entities.Services;
+import com.homeservice.repository.EmployeeDao;
+import com.homeservice.repository.ServiceDao;
+import com.homeservice.repository.ServiceSeekerService;
+
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
+public class ServiceSeekerController {
+
+	@Autowired private ServiceSeekerService service;
+	
+	@Autowired
+	private ModelMapper mapper;
+	
+	@Autowired
+	private EmployeeDao dao;
+	
+	@Autowired
+	private ServiceDao serviceRepository;
+	
+	@PostMapping("/saveseeker")
+	public ResponseEntity<?> saveSeeker( @Valid@RequestBody ServiceSeekerDto ssd){
+		
+		ServiceSeeker ss=mapper.map(ssd, ServiceSeeker.class);
+		
+		
+		
+		int id=ssd.getId();
+		System.out.println(id);
+		
+	    	Employee emp= dao.getEmp(id);
+        	ss.setProvider(emp);	
+		    service.save(ss);
+		return ResponseEntity.ok().body("saved successfully");
+	}
+	
+	@GetMapping("/getprovider/{id}")
+	public Services services(@PathVariable("id")int id){
+		Services service=serviceRepository.getservicebyid(id);
+		return service;
+	}
+	
+	
+	
+}

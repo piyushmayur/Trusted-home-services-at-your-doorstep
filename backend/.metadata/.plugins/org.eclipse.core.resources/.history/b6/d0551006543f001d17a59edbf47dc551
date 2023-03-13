@@ -1,0 +1,39 @@
+package com.comfortatyourdoorstep.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.comfortatyourdoorstep.entities.Services;
+import com.comfortatyourdoorstep.repository.ServiceRepository;
+
+@Component
+public class ServiceDao {
+	
+	@Autowired
+	private ServiceRepository iservice;
+
+	public Services addService(Services service) {
+		// TODO Auto-generated method stub
+		return iservice.save(service);
+	}
+
+	public List<Services> getAllServices() {
+		return iservice.findAll();
+	}
+
+	public void deleteservice(int id) {
+		iservice.deleteById(id);
+	}
+
+	public List<Services> getServicesAndEmployees() {
+		return iservice.findAll();
+	}
+
+	public Services getservicebyid(int id) {
+		Services service= iservice.findById(id).get();
+		return service;
+	}
+
+}

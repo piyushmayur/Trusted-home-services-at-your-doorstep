@@ -1,0 +1,29 @@
+package com.comfortatyourdoorstep.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.comfortatyourdoorstep.entities.AvailableServices;
+import com.comfortatyourdoorstep.repository.IAvailableServices;
+
+@Component
+public class AvailableServicesDao {
+	
+	@Autowired
+	private IAvailableServices  iAvailableServices;
+
+	public List<AvailableServices> getAvailableServices() {
+		List<AvailableServices> list=(List<AvailableServices>) iAvailableServices.findAll();
+		return list ;
+	}
+
+	public AvailableServices addAvailableServices(AvailableServices service) {
+		// TODO Auto-generated method stub
+		AvailableServices result=iAvailableServices.save(service);
+		return result;
+	}
+	
+
+}

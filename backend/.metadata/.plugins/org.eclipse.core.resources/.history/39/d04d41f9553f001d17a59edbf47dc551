@@ -1,0 +1,37 @@
+package com.comfortatyourdoorstep.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.comfortatyourdoorstep.entities.Admin;
+import com.comfortatyourdoorstep.entities.Employee;
+import com.comfortatyourdoorstep.repository.EmployeeRepository;
+
+@Component
+public class ServiceProviderService {
+
+	@Autowired
+	private EmployeeRepository employeeRepository;
+	
+	public Employee addEmployee(Employee emp) {
+		Employee result= employeeRepository.save(emp);
+		return result;
+	}
+
+	public List<Employee> getAllAdmin() {
+		List<Employee> list=employeeRepository.findAll();
+        return list;
+	}
+
+	public void deleteemp(int id) {
+		employeeRepository.deleteById(id);
+	}
+
+	public Employee getEmp(int id) {
+		Employee result= employeeRepository.findByProviderId(id);		
+		return result;
+	}
+}

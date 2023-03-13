@@ -1,0 +1,9 @@
+package com.comfortatyourdoorstep.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.comfortatyourdoorstep.entities.Services;
+
+public interface IService extends JpaRepository<Services, Integer> {
+	
+}

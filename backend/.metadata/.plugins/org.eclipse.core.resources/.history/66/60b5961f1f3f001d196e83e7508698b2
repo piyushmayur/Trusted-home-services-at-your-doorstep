@@ -1,0 +1,13 @@
+package com.homeservice.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.homeservice.entities.Employee;
+
+public interface IEmployee extends JpaRepository<Employee, Integer>{
+	
+    @Query(value = "select * from employee_tb where id=:id", nativeQuery=true)
+	public Employee findByProviderId(int id);
+
+}

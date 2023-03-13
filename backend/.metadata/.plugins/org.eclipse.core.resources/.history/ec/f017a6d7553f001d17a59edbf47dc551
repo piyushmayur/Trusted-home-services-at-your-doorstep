@@ -1,0 +1,72 @@
+package com.comfortatyourdoorstep.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.comfortatyourdoorstep.entities.Address;
+import com.comfortatyourdoorstep.entities.Admin;
+import com.comfortatyourdoorstep.entities.Signup;
+import com.comfortatyourdoorstep.repository.SignupRepository;
+
+@Component
+public class SignupService {
+
+	@Autowired
+	private SignupRepository iSignup;
+	
+	public List<Signup> getAllserviceprovider() {
+        List<Signup> list=(List<Signup>)this.iSignup.findAll();
+        return list;
+    }
+
+	public Signup addserviceProvider(Signup obj) {
+		// TODO Auto-generated method stub
+		Signup result=iSignup.save(obj);
+		return result;
+	}
+
+	
+	
+
+	public List<Integer> getid(String hobby) {
+		return iSignup.getId(hobby);
+		
+	}
+
+	public Signup getpass(int addressid) {
+		return iSignup.getPassword(addressid);
+
+	}
+
+	public Signup setNewPass(String password, String newpassword) {
+		
+		return iSignup.setNewPassword(password,newpassword);
+		
+	}
+
+	public Signup getResult(String newpassword) {
+		
+		return iSignup.getResult(newpassword);
+	}
+
+	public Address addAddressr(Address address) {
+		return iSignup.save(address);
+		
+	}
+
+	
+	public Signup getUserByUserName(String username) {
+		
+		return iSignup.getUserByUserName( username);
+	}
+
+public Signup loginUser(String email) {
+	
+	return iSignup.getLoginDetails(email);
+}
+	
+	
+	
+}

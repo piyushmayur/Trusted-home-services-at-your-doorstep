@@ -1,0 +1,10 @@
+package com.comfortatyourdoorstep.dao;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.comfortatyourdoorstep.entities.AvailableServices;
+
+public interface IAvailableServices extends CrudRepository<AvailableServices, Integer> {
+
+}
+ 

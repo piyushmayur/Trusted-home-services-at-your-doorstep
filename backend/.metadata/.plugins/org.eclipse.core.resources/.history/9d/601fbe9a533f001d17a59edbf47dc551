@@ -1,0 +1,11 @@
+package com.comfortatyourdoorstep.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.comfortatyourdoorstep.entities.ServiceSeeker;
+
+@Repository
+public interface IServiceSeekerDao extends JpaRepository<ServiceSeeker, Integer> {
+
+}

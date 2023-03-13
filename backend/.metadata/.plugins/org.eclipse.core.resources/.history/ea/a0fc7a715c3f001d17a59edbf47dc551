@@ -1,0 +1,72 @@
+package com.comfortatyourdoorstep.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.comfortatyourdoorstep.dto.ServiceSeekerDto;
+import com.comfortatyourdoorstep.entities.Employee;
+import com.comfortatyourdoorstep.entities.ServiceSeeker;
+import com.comfortatyourdoorstep.entities.Services;
+import com.comfortatyourdoorstep.service.ServiceProviderService;
+import com.comfortatyourdoorstep.service.ServiceService;
+import com.comfortatyourdoorstep.service.ServiceSeekerService;
+
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
+public class ServiceSeekerController {
+
+	@Autowired 
+	private ServiceSeekerService serviceSeekerService;
+	
+	@Autowired
+	private ModelMapper mapper;
+	
+	@Autowired
+	private ServiceProviderService dao;
+	
+	@Autowired
+	private ServiceService serviceRepository;
+	
+	@PostMapping("/saveseeker")
+	public ResponseEntity<?> saveSeeker( @Valid@RequestBody ServiceSeekerDto ssd){
+		
+		ServiceSeeker ss = mapper.map(ssd, ServiceSeeker.class);
+
+		int id = ssd.getId();
+		System.out.println(id);
+
+		Employee emp = dao.getEmp(id);
+		ss.setProvider(emp);
+		ServiceSeeker result=serviceSeekerService.save(ss);
+		return ResponseEntity.ok(result);
+	}
+	
+	@GetMapping("/getorderlist1/{id}")
+	public Services services(@PathVariable("id")int id){
+		Services service=serviceRepository.getservicebyid(id);
+		return service;
+	}
+	
+	@GetMapping("/getorderlist")
+	public ResponseEntity<?> getOrderList(){
+		List<ServiceSeeker> list =  serviceSeekerService.getAll();
+		return ResponseEntity.ok(list);
+		
+	}
+	
+	
+	
+}

@@ -1,0 +1,23 @@
+package com.homeservice.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.homeservice.dao.IServiceSeekerDao;
+import com.homeservice.entities.ServiceSeeker;
+
+@Service
+public class ServiceSeekerService {
+
+	@Autowired private IServiceSeekerDao dao;
+	
+	public void save(ServiceSeeker ss) {
+		dao.save(ss);
+	}
+	
+	public List<ServiceSeeker> getAll(){
+		return dao.findAll();
+	}
+}

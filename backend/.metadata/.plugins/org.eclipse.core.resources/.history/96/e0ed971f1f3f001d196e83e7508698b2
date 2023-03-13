@@ -1,0 +1,11 @@
+package com.homeservice.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.homeservice.entities.ServiceSeeker;
+
+@Repository
+public interface IServiceSeekerDao extends JpaRepository<ServiceSeeker, Integer> {
+
+}

@@ -1,0 +1,35 @@
+package com.comfortatyourdoorstep.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.comfortatyourdoorstep.entities.Signup;
+import com.comfortatyourdoorstep.repository.SignupRepository;
+import com.comfortatyourdoorstep.service.SignupService;
+
+public class UserDetailsServiceImpl implements UserDetailsService {
+
+	@Autowired
+	private SignupService signupDao;
+	
+	@Autowired
+	private  SignupRepository iSignup;
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// fetching user by database
+		Signup user= iSignup.getUserByUserName(username);
+		
+		if(user==null)
+		{
+			throw new UsernameNotFoundException("could not found user");
+		}
+		
+		CustomUserDetails customUserDetails=new CustomUserDetails(user);
+		
+		return customUserDetails;
+	}
+
+}

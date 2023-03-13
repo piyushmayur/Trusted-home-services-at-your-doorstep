@@ -1,0 +1,123 @@
+package com.comfortatyourdoorstep.entities;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "serviceprovider_tbl")
+public class Signup{
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	@Column(nullable = false, columnDefinition = "varchar(30) default 'USER'")
+	private String role;
+	
+	@Column(length = 20, name = "first_name")
+	private String firstname;
+	
+	@Column(length = 20, name = "last_name")
+	private String lastname;
+	
+	@Column(length = 30, unique = true)
+	private String email;
+	
+	@Column(length = 10, unique = true, nullable = false)
+	private Long phonenumber;
+	
+	@Column(length = 350, nullable = false)
+	private String password;
+	
+	//private String confirmpassword;
+	
+	@OneToOne(targetEntity=Address.class,cascade=CascadeType.ALL)  
+	private Address address;
+
+	public Signup() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Long getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(Long phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Signup [id=" + id + ", role=" + role + ", firstname=" + firstname + ", lastname=" + lastname
+				+ ", email=" + email + ", phonenumber=" + phonenumber + ", password=" + password + ", confirmpassword="
+				 + ", address=" + address + "]";
+	}  
+		
+	
+	
+	
+}
